@@ -1,17 +1,29 @@
 #include <stdio.h>
 
-struct fracao_s {
+typedef struct {
     float numerador;
     float denominador;
-};
-float calcula(struct fracao_s frac)
-{
+}Fracao;
+
+float calcula(const Fracao frac);
+float calculaRef(const Fracao *frac);
+
+Fracao soma(const Fracao* a, const Fracao* b);
+Fracao multiplica(const Fracao *a, const Fracao *b);
+
+float calcula(const Fracao frac) {
     return frac.numerador / frac.denominador;
+
+
+float calculaRef(const Fracao *frac) {
+    return frac -> numerador / frac -> denominador;
 }
-int main()
-{
-    struct fracao_s f1;
-    f1.numerador = 10.5;
-    f1.denominador = 2.75;
-    printf("Valor: %f\n", calcula(f1));
+
+int main() {
+    Fracao f1;
+    f1.numerador = 10;
+    f1.denominador = 2;
+
+    printf("Valor calcula: %f\n", calcula(f1));
+    printf("Valor calcula por referencia: %f\n", calculaRef(&f1));
 }
